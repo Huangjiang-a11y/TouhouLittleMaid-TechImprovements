@@ -1,13 +1,18 @@
 package com.github.huangjiang.tlmtech.client;
 
+import com.github.huangjiang.tlmtech.client.book.SelfBookOpen;
+import com.github.tartaricacid.touhoulittlemaid.api.event.client.OpenPatchouliBookEvent;
 import net.fabricmc.api.ClientModInitializer;
 
 /**
- * 客户端入口。手册书壳、原版纹理替换的客户端部分挂在这里。
+ * 客户端入口。
+ * <p>
+ * 主模组女仆界面侧栏那个手册按钮现在统一发 {@link OpenPatchouliBookEvent}
+ * （书壳已从主模组剥离），这里接住它，打开本模组的自包含书壳。
  */
 public final class TlmTechClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        // 客户端侧的注册（书壳 / 贴图替换）后续在这里接入
+        OpenPatchouliBookEvent.CALLBACK.register(event -> SelfBookOpen.openDefault());
     }
 }

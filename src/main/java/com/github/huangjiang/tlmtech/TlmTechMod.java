@@ -1,7 +1,12 @@
 package com.github.huangjiang.tlmtech;
 
+import com.github.huangjiang.tlmtech.item.TlmTechItems;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTab;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,12 +22,19 @@ public final class TlmTechMod implements ModInitializer {
     public static final String MOD_ID = "tlm_tech";
     public static final Logger LOGGER = LoggerFactory.getLogger("TlmTech");
 
+    /** 主模组里那个创造模式标签页（InitCreativeTabs 注册的 "main"） */
+    public static final ResourceKey<CreativeModeTab> TLM_MAIN_TAB = ResourceKey.create(
+            Registries.CREATIVE_MODE_TAB, Identifier.fromNamespaceAndPath("touhou_little_maid", "main"));
+
     public static Identifier id(String path) {
         return Identifier.fromNamespaceAndPath(MOD_ID, path);
     }
 
     @Override
     public void onInitialize() {
+        TlmTechItems.init();
+        CreativeModeTabEvents.modifyOutputEvent(TLM_MAIN_TAB)
+                .register(output -> output.accept(TlmTechItems.MEMORIZABLE_GENSOKYO_MANUAL));
         LOGGER.info("[TLM Tech] 车万女仆：技术性改进 附属模组已加载");
     }
 }

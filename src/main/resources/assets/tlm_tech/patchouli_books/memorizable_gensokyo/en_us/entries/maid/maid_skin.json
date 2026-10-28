@@ -1,0 +1,19 @@
+{
+  "sortnum": 3,
+  "name": "patchouli.touhou_little_maid.book.entries.maid.maid_skin.name",
+  "icon": "minecraft:writable_book",
+  "category": "tlm_tech:maid",
+  "pages": [
+    {
+      "type": "text",
+      "text": "patchouli.touhou_little_maid.book.entries.maid.maid_skin.pages.0.text"
+    },
+    {
+      "type": "image",
+      "images": [
+        "tlm_tech:textures/book/skin.png"
+      ],
+      "text": "patchouli.touhou_little_maid.book.entries.maid.maid_skin.pages.1.text"
+    }
+  ]
+}
