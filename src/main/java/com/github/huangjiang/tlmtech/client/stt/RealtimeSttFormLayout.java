@@ -2,6 +2,8 @@ package com.github.huangjiang.tlmtech.client.stt;
 
 import com.github.tartaricacid.touhoulittlemaid.ai.service.stt.STTSite;
 import com.github.huangjiang.tlmtech.stt.RealtimeSttSite;
+import com.github.tartaricacid.touhoulittlemaid.client.gui.entity.maid.ai.layout.FieldDescriptor;
+import com.github.tartaricacid.touhoulittlemaid.client.gui.entity.maid.ai.layout.STTSiteFormLayout;
 import net.minecraft.network.chat.Component;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
