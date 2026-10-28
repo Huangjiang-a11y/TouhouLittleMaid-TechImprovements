@@ -3,7 +3,9 @@
   "minVersion": "0.8",
   "package": "com.github.huangjiang.tlmtech.client.mixin",
   "compatibilityLevel": "JAVA_25",
-  "client": [],
+  "client": [
+    "STTChatKeyMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

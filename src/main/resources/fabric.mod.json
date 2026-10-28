@@ -13,6 +13,9 @@
     "main": [
       "com.github.huangjiang.tlmtech.TlmTechMod"
     ],
+    "little_maid_extension": [
+      "com.github.huangjiang.tlmtech.TlmTechExtension"
+    ],
     "client": [
       "com.github.huangjiang.tlmtech.client.TlmTechClient"
     ]
