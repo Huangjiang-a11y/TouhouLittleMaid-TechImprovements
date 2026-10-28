@@ -11,8 +11,8 @@ permissions:
 env:
   TZ: Asia/Shanghai
   # 主模组 release 与 jar 名（升级主模组时同步改这里，并与 gradle.properties 的 tlm_jar_name 一致）
-  TLM_RELEASE: 26.3-snapshot-2026-10-28-23-42-32
-  TLM_JAR: touhoulittlemaid-fabric-1.0.0-26.3-57a21e6.jar
+  TLM_RELEASE: 26.3-snapshot-2026-10-29-00-10-44
+  TLM_JAR: touhoulittlemaid-fabric-1.0.0-26.3-a8e1b89.jar
 
 jobs:
   build:
