@@ -20,6 +20,7 @@
       "com.github.huangjiang.tlmtech.client.TlmTechClient"
     ]
   },
+  "accessWidener": "tlm_tech.classtweaker",
   "mixins": [
     "tlm_tech.mixins.json",
     "tlm_tech.client.mixins.json"

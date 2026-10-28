@@ -26,6 +26,10 @@ base {
     archivesName = "${archives_base_name}"
 }
 
+loom {
+    accessWidenerPath = file("src/main/resources/tlm_tech.classtweaker")
+}
+
 repositories {
     flatDir { dir "libs" }
     mavenLocal()

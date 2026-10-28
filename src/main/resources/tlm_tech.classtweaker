@@ -1,0 +1,4 @@
+classTweaker v2 official
+
+# 书壳的合成页要遍历配方的原料（主模组用同一份条目的 touhou_little_maid.classtweaker 打开）
+accessible field net/minecraft/world/item/crafting/Ingredient values Lnet/minecraft/core/HolderSet;
