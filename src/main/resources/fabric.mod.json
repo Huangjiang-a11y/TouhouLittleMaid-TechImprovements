@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "tlm_tech",
+  "version": "${version}",
+  "name": "车万女仆：技术性改进",
+  "description": "Touhou Little Maid 的附属模组：把移植过程中做的那些技术性改进集中到一起。\n包含：① 语音识别（STT）的 WebSocket / OpenAI Realtime 站点兼容；② 自制手册书壳（无 Patchouli 依赖的 memorizable_gensokyo）；③ 四项可开关的原版纹理/模型替换（史莱姆模型、经验球、图腾、经验瓶）。\n需要主模组 Touhou Little Maid。\n\nAn add-on for Touhou Little Maid: technical improvements extracted from the port.",
+  "authors": [
+    "Huangjiang"
+  ],
+  "license": "MIT / CC BY-NC-SA 4.0",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.github.huangjiang.tlmtech.TlmTechMod"
+    ],
+    "client": [
+      "com.github.huangjiang.tlmtech.client.TlmTechClient"
+    ]
+  },
+  "mixins": [
+    "tlm_tech.mixins.json",
+    "tlm_tech.client.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.0",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "fabric-api": "*",
+    "touhou_little_maid": ">=1.0.0"
+  }
+}

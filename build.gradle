@@ -1,0 +1,100 @@
+plugins {
+    id 'idea'
+    id 'net.fabricmc.fabric-loom' version '1.17-SNAPSHOT'
+}
+
+// 构建标识：与主仓库同规则，版本后缀短 commit，工作区脏则跟 -dirty
+def gitOutput = { List<String> args ->
+    try {
+        def proc = new ProcessBuilder(['git'] + args).directory(rootDir).redirectErrorStream(true).start()
+        def text = proc.inputStream.text.trim()
+        proc.waitFor()
+        return (proc.exitValue() == 0 && !text.isEmpty()) ? text : null
+    } catch (Exception ignored) {
+        return null
+    }
+}
+def buildCommit = gitOutput(['rev-parse', '--short', 'HEAD'])
+def buildDirty = gitOutput(['status', '--porcelain', '--untracked-files=no']) != null
+if (buildCommit != null) {
+    version = "${project.mod_version}-${project.minecraft_version}-${buildCommit}${buildDirty ? '-dirty' : ''}"
+} else {
+    version = "${project.mod_version}-${project.minecraft_version}"
+}
+group = project.maven_group
+base {
+    archivesName = "${archives_base_name}"
+}
+
+repositories {
+    flatDir { dir "libs" }
+    mavenLocal()
+    mavenCentral()
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    // 26.3 的 Minecraft 是非混淆的（Loom 报 "Cannot use Mojang mappings in a non-obfuscated environment"），
+    // 因此不写 mappings —— 主仓库同样如此，两边名字天然对齐。
+
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    // 主模组 Touhou Little Maid：编译期用 libs/ 里的 jar，运行期由玩家自行安装主模组，故只 compileOnly。
+    def tlmJar = file("libs/${project.tlm_jar_name}")
+    if (!tlmJar.exists()) {
+        throw new GradleException("缺少主模组 jar：请把 ${project.tlm_jar_name} 放到 libs/ 下（见 README）")
+    }
+    compileOnly files(tlmJar)
+    localRuntime files(tlmJar)
+}
+
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+}
+
+processResources {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    inputs.property "version", project.version
+    inputs.property "minecraft_version", project.minecraft_version
+    inputs.property "loader_version", project.loader_version
+    filteringCharset "UTF-8"
+
+    filesMatching("fabric.mod.json") {
+        // 不要用 expand()：Groovy 模板会把 JSON 字符串里的 \n、\" 还原成真字符，产物非法 JSON。
+        filter(org.apache.tools.ant.filters.ReplaceTokens,
+                beginToken: '${',
+                endToken: '}',
+                tokens: [version          : project.version.toString(),
+                         minecraft_version: project.minecraft_version.toString(),
+                         loader_version   : project.loader_version.toString()])
+    }
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ['-Xlint:-removal']
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Jar).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.WARN
+}
+tasks.withType(Zip).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.WARN
+}
+
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
+}

@@ -1,0 +1,61 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: write
+
+env:
+  TZ: Asia/Shanghai
+  # 主模组 release 与 jar 名（升级主模组时同步改这里，并与 gradle.properties 的 tlm_jar_name 一致）
+  TLM_RELEASE: 26.3-snapshot-2026-10-17-23-49-28
+  TLM_JAR: touhoulittlemaid-fabric-1.0.0-26.3-e1925fd.jar
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v6
+        with:
+          java-version: '25'
+          distribution: 'microsoft'
+
+      - name: Fetch Touhou Little Maid jar
+        run: |
+          mkdir -p libs
+          curl -sSL --fail -o "libs/${TLM_JAR}" \
+            "https://github.com/Huangjiang-a11y/TouhouLittleMaid-Orihime-26.3/releases/download/${TLM_RELEASE}/${TLM_JAR}"
+          ls -l libs/
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v6
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: ${{ runner.os }}-gradle-
+
+      - name: Build with Gradle
+        run: |
+          chmod +x ./gradlew
+          ./gradlew build
+
+      - name: Send file to Release
+        if: github.event_name == 'push'
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: build-${{ github.run_number }}
+          target_commitish: ${{ github.sha }}
+          body: ${{ github.event.head_commit.message || 'manual dispatch' }}
+          draft: false
+          prerelease: true
+          files: ./build/libs/*.jar
