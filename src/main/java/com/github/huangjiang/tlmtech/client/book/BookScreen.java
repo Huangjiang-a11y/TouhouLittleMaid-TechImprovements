@@ -1,6 +1,5 @@
 package com.github.huangjiang.tlmtech.client.book;
 
-import com.github.tartaricacid.touhoulittlemaid.client.renderer.EntityPreviewRenderer;
 
 import com.github.tartaricacid.touhoulittlemaid.util.migrate.ScreenUtil;
 import com.mojang.blaze3d.Blaze3D;
@@ -206,7 +205,7 @@ public class BookScreen extends Screen {
             case "image" -> y = this.renderImage(graphics, page, x, y, width);
             case "spotlight" -> y = this.renderSpotlight(graphics, page, x, y, width);
             case "item" -> y = this.renderItemPage(graphics, page, x, y, width);
-            case "entity" -> y = EntityPreviewRenderer.render(graphics, page, x, y, width);
+            case "entity" -> y = EntityPageRenderer.render(graphics, page, x, y, width);
             case "multiblock" -> y = MultiblockPageRenderer.render(graphics, page, x, y, width, this.font, TEXT_COLOR);
             case "crafting" -> {
                 CraftingPageRenderer.render(graphics, page, x, y, width, this.font, TEXT_COLOR);

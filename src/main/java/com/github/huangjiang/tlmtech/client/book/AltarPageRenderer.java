@@ -1,6 +1,5 @@
 package com.github.huangjiang.tlmtech.client.book;
 
-import com.github.tartaricacid.touhoulittlemaid.client.renderer.EntityPreviewRenderer;
 
 import com.github.tartaricacid.touhoulittlemaid.client.event.ClientRecipeEvent;
 import com.github.tartaricacid.touhoulittlemaid.crafting.AltarRecipe;
@@ -94,7 +93,7 @@ public final class AltarPageRenderer {
             if (EntityBox.ENTITY_ID.equals(entityId)) {
                 entityId = EntityMaid.ENTITY_ID;
             }
-            EntityRenderState state = EntityPreviewRenderer.state(entityId == null ? "" : entityId.toString());
+            EntityRenderState state = EntityPageRenderer.state(entityId == null ? "" : entityId.toString());
             if (state != null) {
                 int bs = 34;
                 int bx = ox + 50;
@@ -103,7 +102,7 @@ public final class AltarPageRenderer {
                 float entityScale = Math.max(6.0F, (bs - 4.0F) / Math.max(0.4F, state.boundingBoxHeight));
                 graphics.fill(bx - 1, by - 1, bx + bs, by + bs, SLOT_LIGHT);
                 graphics.fill(bx, by, bx + bs - 1, by + bs - 1, SLOT_DARK);
-                EntityPreviewRenderer.drawCentered(graphics, state, entityScale, bx, by, bx + bs, by + bs, 0.0F);
+                EntityPageRenderer.drawCentered(graphics, state, entityScale, bx, by, bx + bs, by + bs, 0.0F);
             }
         }
     }
