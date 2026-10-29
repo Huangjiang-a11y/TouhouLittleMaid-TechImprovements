@@ -1,7 +1,9 @@
 package com.github.huangjiang.tlmtech;
 
+import com.github.huangjiang.tlmtech.config.TlmTechConfig;
 import com.github.huangjiang.tlmtech.init.TlmTechTriggers;
 import com.github.huangjiang.tlmtech.item.TlmTechItems;
+import fuzs.forgeconfigapiport.fabric.api.v5.ConfigRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
@@ -9,6 +11,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
+import net.neoforged.fml.config.ModConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +37,7 @@ public final class TlmTechMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        ConfigRegistry.INSTANCE.register(MOD_ID, ModConfig.Type.COMMON, TlmTechConfig.init());
         TlmTechItems.init();
         TlmTechTriggers.init();
 

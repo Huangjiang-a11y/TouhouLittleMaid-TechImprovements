@@ -141,5 +141,14 @@
   "patchouli.touhou_little_maid.book.entries.overview.vanilla_change.pages.0.text": "We modified the slime model to the yukkuri.",
   "patchouli.touhou_little_maid.book.entries.overview.vanilla_change.pages.1.text": "We also changed the textures of Experience Orbs, Bottle 'O Enchanting, and Totem of Undying. $(br2)These can all be turned off in the configuration file.",
   "patchouli.touhou_little_maid.book.entries.overview.favorability.name": "Favorability",
-  "patchouli.touhou_little_maid.book.entries.overview.favorability.pages.0.text": "Higher favorability will increase the maid's health and attack.$(br2)improving maid favorability:$(li)When the maid is in idle schedule, she will play with the keyboard, computer, bookshelf or gomoku.$(li)Maid sleeping.$(br2)Reducing maid favorability:$(li)Death of the maid."
+  "patchouli.touhou_little_maid.book.entries.overview.favorability.pages.0.text": "Higher favorability will increase the maid's health and attack.$(br2)improving maid favorability:$(li)When the maid is in idle schedule, she will play with the keyboard, computer, bookshelf or gomoku.$(li)Maid sleeping.$(br2)Reducing maid favorability:$(li)Death of the maid.",
+  "config.tlm_tech.vanilla": "Vanilla",
+  "config.tlm_tech.vanilla.replace_slime_model": "Replace Slime Model",
+  "config.tlm_tech.vanilla.replace_slime_model.tooltip": "Whether to replace the vanilla slime model with the yukkuri",
+  "config.tlm_tech.vanilla.replace_xp_texture": "Replace XP Texture",
+  "config.tlm_tech.vanilla.replace_xp_texture.tooltip": "Whether to replace the vanilla xp orb texture with the point items",
+  "config.tlm_tech.vanilla.replace_totem_texture": "Replace Totem Texture",
+  "config.tlm_tech.vanilla.replace_totem_texture.tooltip": "Whether to replace the vanilla totem texture with the life point",
+  "config.tlm_tech.vanilla.replace_xp_bottle_texture": "Replace XP Bottle Texture",
+  "config.tlm_tech.vanilla.replace_xp_bottle_texture.tooltip": "Whether to replace the vanilla bottle of xp texture with the point items"
 }

@@ -57,6 +57,10 @@ dependencies {
     if (!tlmJar.exists()) {
         throw new GradleException("缺少主模组 jar：请把 ${project.tlm_jar_name} 放到 libs/ 下（见 README）")
     }
+    // Forge Config API Port：主模组用它承载配置（config/touhou_little_maid-common.toml），
+    // 本模组的配置沿用同一套，运行时由主模组那边已经带上的这份提供。
+    compileOnly "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:26.3.1"
+
     compileOnly files(tlmJar)
     localRuntime files(tlmJar)
 }

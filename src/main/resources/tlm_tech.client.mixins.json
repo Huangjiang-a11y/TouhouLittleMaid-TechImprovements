@@ -4,6 +4,7 @@
   "package": "com.github.huangjiang.tlmtech.client.mixin",
   "compatibilityLevel": "JAVA_25",
   "client": [
+    "ClientReloadListenerRegistryMixin",
     "STTChatKeyMixin"
   ],
   "injectors": {
