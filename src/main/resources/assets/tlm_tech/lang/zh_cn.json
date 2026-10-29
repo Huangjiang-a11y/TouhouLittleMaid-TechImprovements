@@ -1,6 +1,6 @@
 {
   "ai.touhou_little_maid.chat.site.openai_realtime.name": "记忆中的幻想乡实时语音",
-  "item.tlm_tech.memorizable_gensokyo_manual": "记忆中的幻想乡",
+  "item.touhou_little_maid.memorizable_gensokyo_manual": "记忆中的幻想乡",
   "modmenu.nameTranslation.tlm_tech": "车万女仆：技术性改进",
   "modmenu.descriptionTranslation.tlm_tech": "把移植过程中做的技术性改进集中到一起：WebSocket 语音识别站点、自制手册书壳、原版纹理替换。",
   "patchouli.touhou_little_maid.book.name": "记忆中的幻想乡",

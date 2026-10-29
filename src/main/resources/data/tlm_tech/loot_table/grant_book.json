@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tlm_tech:memorizable_gensokyo_manual"
+          "name": "touhou_little_maid:memorizable_gensokyo_manual"
         }
       ],
       "rolls": 1.0

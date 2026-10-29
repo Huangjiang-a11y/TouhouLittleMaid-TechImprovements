@@ -1,7 +1,7 @@
 {
   "name": "patchouli.touhou_little_maid.book.name",
   "landing_text": "patchouli.touhou_little_maid.book.landing_text",
-  "model": "tlm_tech:memorizable_gensokyo_manual",
+  "model": "touhou_little_maid:memorizable_gensokyo_manual",
   "creative_tab": "touhou_little_maid.main",
   "show_progress": false,
   "i18n": true,

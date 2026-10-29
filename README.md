@@ -47,3 +47,15 @@ cd <本仓库> && ./gradlew build
   `ClientReloadListenerRegistry.onRegisterClientReloadListeners` 开头，保证早于主模组冻结那张表。
 - 书页的实体渲染：主模组保留通用部分（`client/renderer/EntityPreviewRenderer` 的 `state` / `drawCentered`，
   JEI 的祭坛配方预览也在用），本模组的 `EntityPageRenderer` 只负责书页语义并调用前者。
+
+## 命名空间上的一个例外
+
+手册物品的 id 是 `touhou_little_maid:memorizable_gensokyo_manual`，沿用主模组的命名空间，不是本模组的。
+物品 id 会直接写进存档的 NBT，改动会让玩家已有的手册变成空气；其余东西（配置、书 id、渲染器、
+数据包内容）都不进存档，所以只有这一条破例。物品定义、模型、贴图也就跟着落在
+`assets/touhou_little_maid/` 下（物品定义文件的路径由物品 id 强制决定）。
+
+书的内容仍然留在 `tlm_tech:` 命名空间：书的分类 id 是由书 id 的命名空间推导出来的
+（`BookContentLoader` 里是 `namespace + ":" + 相对路径`，条目里写着 `"category": "tlm_tech:maid"`），
+书 id 一动，50 个条目的分类引用就全部失效、整本书会变空，而书 id 并不存在于存档里，
+改了没有任何兼容收益。
