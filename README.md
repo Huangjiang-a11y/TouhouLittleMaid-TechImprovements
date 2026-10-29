@@ -40,3 +40,10 @@ cd <本仓库> && ./gradlew build
 - 与主模组交互优先走它公开的 API / 事件（`api/` 包、`ILittleMaid` 扩展点）；
   主模组没有提供扩展点的地方，用 mixin 直接改它的类（26.3 是非混淆环境，名字天然对齐）。
 - 附属模组自己的 mixin 配置文件与主模组分开：`tlm_tech.mixins.json`（通用）、`tlm_tech.client.mixins.json`（客户端）。
+- 手册按钮：主模组把女仆界面侧栏那个按钮改成统一发 `OpenPatchouliBookEvent`，装了 Patchouli 由它自己开，
+  没装则由本模组监听同一事件打开自研书壳 —— 主模组因此不需要知道本模组存在。
+- 油库里模型：主模组的 `InternalBedrockModelRegistry.addEntityModel` 把命名空间写死成它自己，
+  本模组改成直接往公开的 `ENTITY_MODELS` 表里注册 `tlm_tech:` 的 id，并用一个 mixin 挂在
+  `ClientReloadListenerRegistry.onRegisterClientReloadListeners` 开头，保证早于主模组冻结那张表。
+- 书页的实体渲染：主模组保留通用部分（`client/renderer/EntityPreviewRenderer` 的 `state` / `drawCentered`，
+  JEI 的祭坛配方预览也在用），本模组的 `EntityPageRenderer` 只负责书页语义并调用前者。
