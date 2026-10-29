@@ -1,0 +1,18 @@
+{
+  "criteria": {
+    "tick": {
+      "trigger": "tlm_tech:give_book"
+    }
+  },
+  "requirements": [
+    [
+      "tick"
+    ]
+  ],
+  "rewards": {
+    "loot": [
+      "tlm_tech:grant_book"
+    ]
+  },
+  "sends_telemetry_event": true
+}

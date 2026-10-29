@@ -1,8 +1,10 @@
 package com.github.huangjiang.tlmtech;
 
+import com.github.huangjiang.tlmtech.init.TlmTechTriggers;
 import com.github.huangjiang.tlmtech.item.TlmTechItems;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -33,8 +35,16 @@ public final class TlmTechMod implements ModInitializer {
     @Override
     public void onInitialize() {
         TlmTechItems.init();
+        TlmTechTriggers.init();
+
         CreativeModeTabEvents.modifyOutputEvent(TLM_MAIN_TAB)
                 .register(output -> output.accept(TlmTechItems.MEMORIZABLE_GENSOKYO_MANUAL));
+
+        // 首次进服赠送手册：原主模组是 EnterServerEvent 触发 give_patchouli_book_config，
+        // advancement 完成后按 loot_table 发书，这里照搬同一套，只是换成自己的触发器与战利品表。
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) ->
+                TlmTechTriggers.GIVE_BOOK.trigger(handler.getPlayer()));
+
         LOGGER.info("[TLM Tech] 车万女仆：技术性改进 附属模组已加载");
     }
 }
