@@ -1,4 +1,5 @@
 {
+  "ai.touhou_little_maid.chat.site.openai_realtime.name": "Memorizable Gensokyo Realtime STT",
   "item.tlm_tech.memorizable_gensokyo_manual": "Memorizable Gensokyo",
   "modmenu.nameTranslation.tlm_tech": "Touhou Little Maid: Technical Improvements",
   "modmenu.descriptionTranslation.tlm_tech": "Technical improvements extracted from the port: WebSocket STT sites, self-contained guide book, vanilla texture replacements.",
